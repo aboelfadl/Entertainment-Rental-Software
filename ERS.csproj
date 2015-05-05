@@ -88,6 +88,7 @@
     <Compile Include="Catering_Report.Designer.cs">
       <DependentUpon>Catering_Report.cs</DependentUpon>
     </Compile>
+    <Compile Include="Catering_Report_Model.cs" />
     <Compile Include="CustomerModel.cs" />
     <Compile Include="Customers.cs">
       <SubType>Form</SubType>
@@ -101,6 +102,7 @@
     <Compile Include="Customer_Bill.Designer.cs">
       <DependentUpon>Customer_Bill.cs</DependentUpon>
     </Compile>
+    <Compile Include="Customer_Bill_Model.cs" />
     <Compile Include="Interface1.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
@@ -108,12 +110,17 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Login_Model.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="ReservationModel.cs" />
+    <Compile Include="Revenue_Report_Model.cs" />
+    <Compile Include="Rooms_Report_Model.cs" />
+    <Compile Include="Rooms_Status_Model.cs" />
+    <Compile Include="Search_Model.cs" />
     <Compile Include="SplashScreen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +178,7 @@
     <Compile Include="Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Users_Model.cs" />
     <EmbeddedResource Include="Catering.resx">
       <DependentUpon>Catering.cs</DependentUpon>
     </EmbeddedResource>

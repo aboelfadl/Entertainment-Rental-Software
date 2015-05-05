@@ -13,6 +13,7 @@ namespace ERS
     public partial class Login : Form
     {
         public string ID { get; set; }
+
         public Login()
         {
             InitializeComponent();
@@ -38,7 +39,6 @@ namespace ERS
             button2.Height = 0;
 
         }
-
        
         private void button2_Click(object sender, EventArgs e)
         {
@@ -47,11 +47,8 @@ namespace ERS
 
         private void button1_Click(object sender, EventArgs e)
         {
-                if(ID=="Admin" || ID=="User")
+            if(ID=="Admin" || ID=="User")
             {
-               
-
-
                 MainScreen main = new MainScreen(ID);
                 this.Hide();
                 main.Show();
@@ -61,7 +58,6 @@ namespace ERS
                 MessageBox.Show("Account not found");
                 return;
             }
-            
         }
     }
 }
