@@ -23,7 +23,10 @@ namespace ERS
 
             bindingSource1 = new BindingSource();
 
-            Model.GetDataSource(this, TableName);
+            if (!Model.GetDataSource(this, TableName))
+            {
+                MessageBox.Show("No data to show");
+            }
         }
 
         public void SetBinding(SqlDataReader b)
@@ -32,17 +35,14 @@ namespace ERS
 
             dataGridView.ForeColor = Color.FromArgb(0, 0, 0, 0);
             dataGridView.DataSource = bindingSource1;
+
             try
             {
-
-
                 dataGridView.Columns["Deleted"].Visible = false;
             }
-            catch
-            {
+            catch (Exception e) { }
 
-            }
-            dataGridView.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill; ;
+            dataGridView.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill;
             dataGridView.Show();
             dataGridView.MultiSelect = false;
         }
