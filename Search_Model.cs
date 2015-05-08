@@ -16,7 +16,19 @@ namespace ERS
             SQLConnection.conn.Open();
 
             SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "Select * from " + table_name;
+            if (table_name == "Room")
+            {
+                SQLConnection.cmd.CommandText = "Select * from Room where Deleted = 'False' ";
+            }
+            else if(table_name == "Catering")
+            {
+                SQLConnection.cmd.CommandText = "Select * from Catering where Deleted = 'False' ";
+            }
+            else
+            {
+                SQLConnection.cmd.CommandText = "Select * from " + table_name;
+                
+            }
             SQLConnection.cmd.CommandType = CommandType.Text;
             SqlDataReader temp = SQLConnection.cmd.ExecuteReader();
 

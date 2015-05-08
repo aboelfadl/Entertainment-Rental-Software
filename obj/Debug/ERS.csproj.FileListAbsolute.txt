@@ -75,3 +75,4 @@ C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.User
 C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.csproj.GenerateResource.Cache
 C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.exe.manifest
 C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.application
+C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.csprojResolveAssemblyReference.cache

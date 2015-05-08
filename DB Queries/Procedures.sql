@@ -83,19 +83,22 @@ IF object_id('Create_Room') IS NULL
 Alter Procedure Create_Room
  @ID   varchar(255),
  @DISC   varchar(255),
- @Price money
+ @Price money,
+ @Delete bit=False
  As
      INSERT INTO  [Room]
           ( 
             R_ID                   ,
             DISC                     ,
-            Price                                                      
+            Price                     ,
+            Deleted			
           ) 
      VALUES 
           ( 
             @ID                   ,
             @DISC                     ,
-            @Price                                      
+            @Price                     ,
+             @Delete			
 	    	)
 GO
 ---------------------------------------------------------------------------------------------------------------
@@ -118,9 +121,10 @@ IF object_id('Delete_Room') IS NULL
 
 Alter Procedure Delete_Room
  @ID   varchar(255)
- As
- Delete FROM [Room]
-WHERE R_ID=@ID; 
+ Update  [Room]
+ SET Deleted='True'
+WHERE R_ID=@ID and Deleted='False'; ; 
+
 GO
 -------------------------------------------------------------------------------------------------------------------
 IF object_id('Edit_Room') IS NULL
@@ -134,18 +138,19 @@ Alter Procedure Edit_Room
  As
  UPDATE [Room]
 SET Price=@Price , DISC=@DISC
-WHERE R_ID=@ID; 
+WHERE R_ID=@ID and Deleted='False'; 
 GO
 ------------------------------------------------------------------------------------------------------------------
-IF object_id('Retrieve_Rooms') IS NULL
- EXEC ('create procedure Retrieve_Rooms as select 1')
- GO
+	IF object_id('Retrieve_Rooms') IS NULL
+	 EXEC ('create procedure Retrieve_Rooms as select 1')
+	 GO
 
-Alter Procedure Retrieve_Rooms
-AS
-SELECT R_ID
-FROM Room;
-GO
+	Alter Procedure Retrieve_Rooms
+	AS
+	SELECT R_ID
+	FROM Room
+	where Deleted = 'False';
+	GO
 
 ---------------------------------------------------------------------------------------------------------------
 -- Room Tables procedure END
@@ -215,21 +220,25 @@ Alter Procedure New_Catering
  @Name   varchar(255),
  @Cost  money,
  @Price money,
- @Stock decimal(11,0)
+ @Stock decimal(11,0),
+ @Delete bit='False'
+ 
  As
      INSERT INTO  Catering
           ( 
             Name                   ,
             Cost                   ,
 			Price                  ,
-			Stock                                                      
+			Stock                  ,
+          	Deleted		
           ) 
      VALUES 
           ( 
             @Name                   ,
             @Cost                   ,
 			@Price                  ,
-			@Stock                                    
+			@Stock                  ,
+            @Delete			
 	    	)
 GO
 -------------------------------------------------------------------------------------
@@ -246,7 +255,7 @@ Alter Procedure Update_catering
  As
  UPDATE [Catering]
 SET Price=@Price , Cost=@Cost , Stock=@Stock , Name=@Name 
-WHERE F_ID=@ID; 
+WHERE F_ID=@ID and Deleted='False'; 
 GO
 --------------------------------------------------------------------------------------
 IF object_id('Delete_catering') IS NULL
@@ -256,8 +265,9 @@ IF object_id('Delete_catering') IS NULL
 Alter Procedure Delete_catering
  @ID int
  As
- DELETE FROM [Catering] 
-WHERE F_ID=@ID; 
+ Update  [Catering]
+ SET Deleted='True' 
+WHERE F_ID=@ID and Deleted='False'; 
 GO
 --------------------------------------------------------------------------------------
 IF object_id('Add_Stock') IS NULL

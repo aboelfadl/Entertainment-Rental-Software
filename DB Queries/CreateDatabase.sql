@@ -27,7 +27,8 @@ create table Room
 (
  R_ID int NOT NULL   PRIMARY KEY,
  Disc varchar(255),
- Price money
+ Price money,
+ Deleted bit
 )
 go
 if not exists (select * from sysobjects where name='Reservation' and xtype='U')
@@ -44,11 +45,14 @@ if not exists (select * from sysobjects where name='Catering' and xtype='U')
 create table Catering
 (
 F_ID int Not NULL IDENTITY  PRIMARY KEY,
-Name varchar(255) NOT NULL UNIQUE,
+Name varchar(255) NOT NULL ,
 Price money NOT NULL,
 Cost money NOT NULL,
-Stock int
+Stock int,
+Deleted bit
 )
+go
+CREATE UNIQUE NONCLUSTERED INDEX Unique_Name_Status ON Catering (Name) where Deleted='False'
 go
 if not exists (select * from sysobjects where name='Room_Catering' and xtype='U')
 create table Room_Catering

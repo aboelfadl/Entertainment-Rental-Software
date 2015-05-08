@@ -74,7 +74,7 @@ namespace ERS
             
             if(suc ==-1)
             {
-                MessageBox.Show("Error Couldn't Add entry to the database check if this ID isn't alredy used");
+                MessageBox.Show("Error Couldn't Add entry to the database check if this ID isn't alredy used or was used with a deleted room");
                 return;
             }
             else if(suc ==0)
@@ -180,6 +180,17 @@ namespace ERS
 
         private void DeleteRoom(object sender, EventArgs e)
         {
+
+            DialogResult dialogResult = MessageBox.Show("If the room is deleted this ID will not  be usable for any other rooms , Use Edit if you want to edit a details.            Are you sure you want to delete this room ? ", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+                
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
             int ID;
             try
             {

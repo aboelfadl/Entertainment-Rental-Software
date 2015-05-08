@@ -124,5 +124,12 @@ namespace ERS
         {
             Application.Exit();
         }
+
+        private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Login Main = new Login();
+            Main.Show();
+            this.Hide();
+        }
     }
 }

@@ -57,7 +57,7 @@ namespace ERS
             }
             else
             {
-                MessageBox.Show("Failed to insert catering , Check if ID already used");
+                MessageBox.Show("Failed to insert catering , Check if ID already used or was used with a deleted Product");
             }
             
         }
@@ -92,6 +92,17 @@ namespace ERS
        
         private void DeleteCatering(object sender, EventArgs e)
         {
+
+            DialogResult dialogResult = MessageBox.Show("If the Catering is deleted this ID will not  be usable for any other products , Use Edit if you want to edit a details.            Are you sure you want to delete this room ? ", "Warning", MessageBoxButtons.YesNo);
+            if (dialogResult == DialogResult.Yes)
+            {
+
+            }
+            else if (dialogResult == DialogResult.No)
+            {
+                return;
+            }
+
             bool success = false;
             try
             {
