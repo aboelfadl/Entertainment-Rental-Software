@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace ERS
 {
@@ -21,7 +22,13 @@ namespace ERS
             Model = new Search_Model();
 
             bindingSource1 = new BindingSource();
-            bindingSource1.DataSource = Model.GetDataSource(TableName);
+
+            Model.GetDataSource(this, TableName);
+        }
+
+        public void SetBinding(SqlDataReader b)
+        {
+            bindingSource1.DataSource = b;
 
             dataGridView.ForeColor = Color.FromArgb(0, 0, 0, 0);
             dataGridView.DataSource = bindingSource1;

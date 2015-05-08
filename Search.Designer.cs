@@ -79,6 +79,6 @@
 
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.BindingSource bindingSource1;
+        public System.Windows.Forms.BindingSource bindingSource1;
     }
 }

@@ -49,3 +49,29 @@ C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.exe.man
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.application
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.exe
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.pdb
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.exe.config
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.exe
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.pdb
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.exe.manifest
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.application
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.exe
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.pdb
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.csprojResolveAssemblyReference.cache
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Catering.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Catering_Report.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Customers.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Customer_Bill.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Login.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.SplashScreen.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.MainScreen.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Properties.Resources.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Reservations.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Revenue_Report.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Rooms.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Rooms_Report.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Rooms_Status.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Search.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Users.resources
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.csproj.GenerateResource.Cache
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.exe.manifest
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.application
