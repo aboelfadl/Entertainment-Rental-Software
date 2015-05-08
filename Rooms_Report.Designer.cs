@@ -29,16 +29,16 @@
         private void InitializeComponent()
         {
             this.reporttype_grp = new System.Windows.Forms.GroupBox();
-            this.oneroom_radio = new System.Windows.Forms.RadioButton();
             this.allrooms_radio = new System.Windows.Forms.RadioButton();
+            this.oneroom_radio = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.rooms_combo = new System.Windows.Forms.ComboBox();
             this.print_btn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.from_date = new System.Windows.Forms.DateTimePicker();
             this.to_date = new System.Windows.Forms.DateTimePicker();
+            this.from_date = new System.Windows.Forms.DateTimePicker();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.reporttype_grp.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -55,18 +55,6 @@
             this.reporttype_grp.TabStop = false;
             this.reporttype_grp.Text = "Report Type";
             // 
-            // oneroom_radio
-            // 
-            this.oneroom_radio.AutoSize = true;
-            this.oneroom_radio.ForeColor = System.Drawing.Color.Black;
-            this.oneroom_radio.Location = new System.Drawing.Point(29, 35);
-            this.oneroom_radio.Name = "oneroom_radio";
-            this.oneroom_radio.Size = new System.Drawing.Size(91, 20);
-            this.oneroom_radio.TabIndex = 0;
-            this.oneroom_radio.TabStop = true;
-            this.oneroom_radio.Text = "One Room";
-            this.oneroom_radio.UseVisualStyleBackColor = true;
-            // 
             // allrooms_radio
             // 
             this.allrooms_radio.AutoSize = true;
@@ -78,6 +66,18 @@
             this.allrooms_radio.TabStop = true;
             this.allrooms_radio.Text = "All Rooms";
             this.allrooms_radio.UseVisualStyleBackColor = true;
+            // 
+            // oneroom_radio
+            // 
+            this.oneroom_radio.AutoSize = true;
+            this.oneroom_radio.ForeColor = System.Drawing.Color.Black;
+            this.oneroom_radio.Location = new System.Drawing.Point(29, 35);
+            this.oneroom_radio.Name = "oneroom_radio";
+            this.oneroom_radio.Size = new System.Drawing.Size(91, 20);
+            this.oneroom_radio.TabIndex = 0;
+            this.oneroom_radio.TabStop = true;
+            this.oneroom_radio.Text = "One Room";
+            this.oneroom_radio.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -92,7 +92,6 @@
             // 
             // rooms_combo
             // 
-            this.rooms_combo.Enabled = false;
             this.rooms_combo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
             this.rooms_combo.ForeColor = System.Drawing.Color.Black;
             this.rooms_combo.FormattingEnabled = true;
@@ -110,6 +109,7 @@
             this.print_btn.TabIndex = 3;
             this.print_btn.Text = "Print";
             this.print_btn.UseVisualStyleBackColor = true;
+            this.print_btn.Click += new System.EventHandler(this.print_btn_Click);
             // 
             // groupBox1
             // 
@@ -125,16 +125,23 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Date";
             // 
-            // label2
+            // to_date
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(56, 27);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(39, 16);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "From";
+            this.to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.to_date.Location = new System.Drawing.Point(285, 24);
+            this.to_date.Name = "to_date";
+            this.to_date.Size = new System.Drawing.Size(99, 22);
+            this.to_date.TabIndex = 9;
+            this.to_date.Value = new System.DateTime(2015, 4, 13, 1, 39, 57, 0);
+            // 
+            // from_date
+            // 
+            this.from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.from_date.Location = new System.Drawing.Point(111, 24);
+            this.from_date.Name = "from_date";
+            this.from_date.Size = new System.Drawing.Size(99, 22);
+            this.from_date.TabIndex = 8;
+            this.from_date.Value = new System.DateTime(2015, 4, 13, 1, 39, 57, 0);
             // 
             // label3
             // 
@@ -147,23 +154,16 @@
             this.label3.TabIndex = 7;
             this.label3.Text = "To";
             // 
-            // from_date
+            // label2
             // 
-            this.from_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.from_date.Location = new System.Drawing.Point(111, 24);
-            this.from_date.Name = "from_date";
-            this.from_date.Size = new System.Drawing.Size(99, 22);
-            this.from_date.TabIndex = 8;
-            this.from_date.Value = new System.DateTime(2015, 4, 13, 1, 39, 57, 0);
-            // 
-            // to_date
-            // 
-            this.to_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.to_date.Location = new System.Drawing.Point(285, 24);
-            this.to_date.Name = "to_date";
-            this.to_date.Size = new System.Drawing.Size(99, 22);
-            this.to_date.TabIndex = 9;
-            this.to_date.Value = new System.DateTime(2015, 4, 13, 1, 39, 57, 0);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F);
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(56, 27);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(39, 16);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "From";
             // 
             // Rooms_Report
             // 
