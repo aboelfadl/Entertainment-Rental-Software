@@ -33,6 +33,90 @@ namespace ERS
             Model = new ReservationModel();
             SetComboBox(Model.FillBox());
             CustomerID = -1;
+            Duration.SelectedItem = null;
+            Duration.DropDownStyle = ComboBoxStyle.DropDownList;
+            room_combobox.SelectedIndexChanged += new EventHandler(Room_Changed);
+            Duration.SelectedIndexChanged += new EventHandler(Duration_Changed);
+        }
+
+        private void Duration_Changed(object sender, EventArgs e)
+        {
+            double hours;
+            double minutes;
+            try
+            {
+                string hourT = start_txt.Text.Substring(0, 2);
+                string MinuteT = start_txt.Text.Substring(3, 2);
+                 hours = double.Parse(hourT);
+                 minutes = double.Parse(MinuteT);
+                Exception E = new Exception();
+                if (hours < 0 || hours > 23 || minutes < 0 || minutes > 59) throw  E;
+            }
+            catch
+            {
+                MessageBox.Show("Please enter the start time in the correct format.");
+                Duration.SelectedItem = null;
+                return;
+            }
+            double dur = 0;
+            double min = 0;
+            switch (Duration.SelectedIndex)
+            {
+                case 0:
+                    dur = 0;
+                    min = 30;
+                    break;
+
+                case 1:
+                    dur = 1;
+                    break;
+
+                case 2:
+                    dur = 1;
+                    min = 30;
+                    break;
+
+                case 3:
+                    dur = 2;
+
+                    break;
+
+                default:
+                    break;
+            }
+
+            hours += dur;
+            minutes += min;
+
+            if (minutes > 59)
+            {
+                hours++;
+                minutes -= 60;
+            }
+            
+            
+            
+            
+            if (hours > 23) hours -= 24;
+            
+            if(hours < 10)
+            {
+                 end_txt.Text="0"+hours.ToString()+":";
+            }
+            else
+            {
+                end_txt.Text = hours.ToString()+":";
+            }
+            if (minutes<10)
+            {
+                end_txt.Text = end_txt.Text + "0" + minutes.ToString();
+            }
+            else
+            {
+                end_txt.Text = end_txt.Text + minutes.ToString();
+            }
+
+          
         }
         public void SetComboBox(DataSet ds)
         {
@@ -208,6 +292,13 @@ namespace ERS
 
 
             
+        }
+
+        private void Time_now_Click(object sender, EventArgs e)
+        {
+
+            start_txt.Text = DateTime.Now.ToString("HH:mm");
+
         }
 
 

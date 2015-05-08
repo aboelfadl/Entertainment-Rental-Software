@@ -31,6 +31,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.room_combobox = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.Duration = new System.Windows.Forms.ComboBox();
+            this.Time_now = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.end_txt = new System.Windows.Forms.TextBox();
@@ -48,7 +51,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.room_status = new System.Windows.Forms.ToolStripStatusLabel();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
@@ -77,6 +79,9 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.Duration);
+            this.groupBox1.Controls.Add(this.Time_now);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.end_txt);
@@ -90,6 +95,40 @@
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Time";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(345, 75);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 16);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Duration";
+            // 
+            // Duration
+            // 
+            this.Duration.ForeColor = System.Drawing.Color.Black;
+            this.Duration.FormattingEnabled = true;
+            this.Duration.Items.AddRange(new object[] {
+            "0.5 Hour",
+            "1    Hour",
+            "1.5 Hours",
+            "2    Hours"});
+            this.Duration.Location = new System.Drawing.Point(410, 72);
+            this.Duration.Name = "Duration";
+            this.Duration.Size = new System.Drawing.Size(121, 24);
+            this.Duration.TabIndex = 13;
+            // 
+            // Time_now
+            // 
+            this.Time_now.ForeColor = System.Drawing.Color.Black;
+            this.Time_now.Location = new System.Drawing.Point(151, 71);
+            this.Time_now.Name = "Time_now";
+            this.Time_now.Size = new System.Drawing.Size(100, 23);
+            this.Time_now.TabIndex = 12;
+            this.Time_now.Text = "Now";
+            this.Time_now.UseVisualStyleBackColor = true;
+            this.Time_now.Click += new System.EventHandler(this.Time_now_Click);
             // 
             // label7
             // 
@@ -253,21 +292,11 @@
             this.room_status.Name = "room_status";
             this.room_status.Size = new System.Drawing.Size(0, 17);
             // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(35, 13);
-            this.label5.TabIndex = 11;
-            this.label5.Text = "label5";
-            // 
             // Reservations
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(677, 519);
-            this.Controls.Add(this.label5);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.save_btn);
@@ -315,5 +344,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox Duration;
+        private System.Windows.Forms.Button Time_now;
     }
 }

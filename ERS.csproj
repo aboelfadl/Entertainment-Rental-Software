@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="ReservationModel.cs" />
     <Compile Include="Revenue_Report_Model.cs" />
+    <Compile Include="RoomModel.cs" />
     <Compile Include="Rooms_Report_Model.cs" />
     <Compile Include="Rooms_Status_Model.cs" />
     <Compile Include="Search_Model.cs" />

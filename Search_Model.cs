@@ -17,6 +17,9 @@ namespace ERS
             SQLConnection.cmd.CommandText = "Select * from " + table_name;
             SQLConnection.cmd.CommandType = CommandType.Text;
             SqlDataReader temp = SQLConnection.cmd.ExecuteReader();
+            DataTable Table = new DataTable();
+           
+
             SQLConnection.conn.Close();
             return temp;
         }
