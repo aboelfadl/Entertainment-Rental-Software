@@ -77,3 +77,4 @@ D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Entertai
 D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Entertainment-Rental-Software\obj\Debug\ERS.application
 D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Entertainment-Rental-Software\obj\Debug\ERS.exe
 D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Entertainment-Rental-Software\obj\Debug\ERS.pdb
+C:\Users\Ahmed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.Report_Display.resources

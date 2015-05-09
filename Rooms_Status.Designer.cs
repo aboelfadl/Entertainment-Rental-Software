@@ -33,6 +33,7 @@
             // 
             // refresh_btn
             // 
+            this.refresh_btn.ForeColor = System.Drawing.Color.Black;
             this.refresh_btn.Location = new System.Drawing.Point(570, 12);
             this.refresh_btn.Name = "refresh_btn";
             this.refresh_btn.Size = new System.Drawing.Size(75, 23);
