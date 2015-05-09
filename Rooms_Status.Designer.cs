@@ -28,13 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.refresh_btn = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // refresh_btn
+            // 
+            this.refresh_btn.Location = new System.Drawing.Point(570, 12);
+            this.refresh_btn.Name = "refresh_btn";
+            this.refresh_btn.Size = new System.Drawing.Size(75, 23);
+            this.refresh_btn.TabIndex = 0;
+            this.refresh_btn.Text = "Refresh";
+            this.refresh_btn.UseVisualStyleBackColor = true;
+            this.refresh_btn.Click += new System.EventHandler(this.refresh_btn_Click);
             // 
             // Rooms_Status
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(680, 382);
+            this.Controls.Add(this.refresh_btn);
             this.Name = "Rooms_Status";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -44,6 +56,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Button refresh_btn;
 
 
 

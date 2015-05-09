@@ -77,5 +77,49 @@ namespace ERS
 
             return time;
         }
+
+        public String Calc_ReservationLength(int i)
+        {
+            SQLConnection.conn.Open();
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "Select CAST((GETDATE()-Reservation.StartTime) as time(0)) as ResLength from Reservation where EndTime is NULL";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+
+            SqlDataAdapter da = new SqlDataAdapter(SQLConnection.cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            String time = dt.Rows[i][0].ToString();
+
+            SQLConnection.conn.Close();
+
+            return time;
+        }
+
+        public List<String> GetEmptyRooms()
+        {
+            List<String> temp = new List<string>();
+
+            SQLConnection.conn.Open();
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "Select R_ID from Room Except Select R_ID from Reservation where EndTime is NULL";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+
+            SqlDataAdapter da = new SqlDataAdapter(SQLConnection.cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                SQLConnection.cmd.Parameters.Clear();
+                SQLConnection.cmd.CommandText = "Select Disc from Room where R_ID = " + dt.Rows[i][0].ToString();
+                SQLConnection.cmd.CommandType = CommandType.Text;
+                temp.Add("Room: " + dt.Rows[i][0].ToString() + "                       Description: " + (String)SQLConnection.cmd.ExecuteScalar());
+            }
+
+            SQLConnection.conn.Close();
+
+            return temp;
+        }
     }
 }
