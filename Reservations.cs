@@ -25,6 +25,7 @@ namespace ERS
         //public string End_Time { get; set; }
 
         int CustomerID;
+        int ReservationID=-1;
          ReservationModel Model;
         
         public Reservations()
@@ -37,6 +38,43 @@ namespace ERS
             Duration.DropDownStyle = ComboBoxStyle.DropDownList;
             room_combobox.SelectedIndexChanged += new EventHandler(Room_Changed);
             Duration.SelectedIndexChanged += new EventHandler(Duration_Changed);
+
+
+            dataGridView1.ForeColor = Color.Black;
+            dataGridView1.AutoSizeColumnsMode = (DataGridViewAutoSizeColumnsMode)DataGridViewAutoSizeColumnMode.Fill; ;
+            dataGridView1.EditMode = DataGridViewEditMode.EditOnEnter;
+            
+
+            //DataGridViewComboBoxColumn cmb = new DataGridViewComboBoxColumn();
+            //cmb.HeaderText = "Product";
+            //cmb.Name = "Name";
+            //cmb.MaxDropDownItems = 10;
+            //cmb.Items.Add("Molto");
+            //cmb.Items.Add("Hohos");
+            //dataGridView1.Columns.Add(cmb);
+
+
+
+            //dataGridView1.ColumnCount+=1;
+            //dataGridView1.Columns[dataGridView1.ColumnCount - 1].Name = "Price";
+            //dataGridView1.Columns[dataGridView1.ColumnCount - 1].ReadOnly = true;
+
+            
+            //DataGridViewComboBoxColumn cmb2 = new DataGridViewComboBoxColumn();
+            //cmb2.HeaderText = "Quantity";
+            //cmb2.Name = "Quantity";
+            //cmb2.MaxDropDownItems = 10;
+            //for(int i=0;i<10;i++)
+            //{
+            //    string t = i.ToString();
+            //    cmb2.Items.Add(t);
+            //}
+
+           
+            //dataGridView1.Columns.Add(cmb2);
+
+
+
         }
 
         private void Duration_Changed(object sender, EventArgs e)
@@ -125,7 +163,7 @@ namespace ERS
             room_combobox.DisplayMember = "R_ID";
             room_combobox.SelectedItem = null;
             room_combobox.DropDownStyle = ComboBoxStyle.DropDownList;
-            room_combobox.SelectedIndexChanged += new EventHandler(Room_Changed);
+           
         }
 
 
@@ -242,17 +280,90 @@ namespace ERS
                 start_txt.Text = "";
                 end_txt.Text = ""; 
                 custNum_txt.Text = "";
+                dataGridView1.DataSource = null;
             }
             else
             {
                 room_status.Text = "Room is Full";
-          CustomerID =(int) ds.Tables[0].Rows[0][0];
+                CustomerID =(int) ds.Tables[0].Rows[0][0];
                 DateTime Strt = (DateTime)ds.Tables[0].Rows[0][1];
+                ReservationID = Int16.Parse(ds.Tables[0].Rows[0][2].ToString());
                 start_txt.Text = Strt.TimeOfDay.ToString();
                 start_txt.Text = start_txt.Text.Remove(start_txt.Text.Length - 3);
                   DataSet ds2=   Model.GetCustomerDataModel(CustomerID);
                 custName_txt.Text = (string)ds2.Tables[0].Rows[0][0];
-                custNum_txt.Text = ds2.Tables[0].Rows[0][1].ToString(); 
+                custNum_txt.Text = ds2.Tables[0].Rows[0][1].ToString();
+                
+                DataSet ds3 = Model.CateringUsed(ReservationID);
+                dataGridView1.DataSource = ds3.Tables[0];
+                for (int i = 0; i < dataGridView1.Rows.Count; i++)
+			{
+			   dataGridView1.Rows[i].ReadOnly = true;
+			}
+               
+              
+
+                DataGridViewComboBoxCell cmb = new DataGridViewComboBoxCell();
+
+              DataSet ds4 = Model.AvailableCateringName();
+ 
+              cmb.DataSource = ds4.Tables[0];
+              cmb.ValueMember = "Name";
+              
+
+                dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[0] = cmb;
+                dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0].ReadOnly = false;
+                cmb.Value = null;
+
+
+                DataGridViewComboBoxCell cmb2 = new DataGridViewComboBoxCell();
+                for (int i = 1; i < 11; i++)
+                {
+                    cmb2.Items.Add(i.ToString());
+                }
+                cmb2.Value = null;
+                dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2] = cmb2;
+                dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2].ReadOnly = false;
+                dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(Trial);
+
+                //dataGridView1.AllowUserToAddRows = false;
+            }
+            return;
+        }
+
+        private void Trial(object sender, DataGridViewCellEventArgs e)
+        {
+          //  dataGridView1.AllowUserToAddRows = false;
+            DataGridViewCell cell = dataGridView1.CurrentCell;
+
+            if(cell.ColumnIndex==0)
+            {
+                decimal price = Model.GetCateringPrice(cell.Value.ToString());
+                dataGridView1.Rows[cell.RowIndex].Cells[1].Value = price;
+            }
+            else if(cell.ColumnIndex==2)
+            {
+                if(dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString()=="")
+                {
+                    MessageBox.Show("Please choose a product first then the quantity.");
+                    cell.Value = null;
+                    return;
+                }
+               int suc =  Model.NewCatering(ReservationID, dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString(), int.Parse(cell.Value.ToString()));
+                if(suc ==1 )
+                {
+                    MessageBox.Show("Catering Added successfully");
+                    object S = new object();
+                    EventArgs EV = new EventArgs();
+                  //  dataGridView1.AllowUserToAddRows = true;
+                    Room_Changed(S,EV);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("Failed to Add Catering");
+                    return;
+                }
             }
         }
 

@@ -169,7 +169,7 @@ namespace ERS
         {
             DataSet ds = new DataSet();
             SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "SELECT C_ID , StartTime  FROM Reservation where EndTime is NULL AND R_ID=" + temp + ";";
+            SQLConnection.cmd.CommandText = "SELECT C_ID , StartTime ,Res_ID FROM Reservation where EndTime is NULL AND R_ID=" + temp + ";";
             SQLConnection.cmd.CommandType = CommandType.Text;
             SQLConnection.adapter.SelectCommand = SQLConnection.cmd;
             SQLConnection.adapter.Fill(ds);
@@ -213,6 +213,88 @@ namespace ERS
              SQLConnection.cmd.Parameters.Clear();
              SQLConnection.conn.Close();
             return ds;
+        }
+
+        public DataSet CateringUsed(int ReseravtionID)
+        {
+            DataSet ds = new DataSet();
+            DataSet ds2 = new DataSet();
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "select F_ID , Quantity  from Room_Catering where Res_ID=" + ReseravtionID.ToString() + ";";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+            SQLConnection.adapter.SelectCommand = SQLConnection.cmd;
+            SQLConnection.adapter.Fill(ds);
+            SQLConnection.cmd.Parameters.Clear();
+         
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                
+            SQLConnection.cmd.CommandText = "select Name , Price  from Catering where F_ID=" +  ds.Tables[0].Rows[i][0].ToString() + ";";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+            SQLConnection.adapter.SelectCommand = SQLConnection.cmd;
+            SQLConnection.adapter.Fill(ds2);
+      if(i==0)      ds2.Tables[0].Columns.Add("Quantity");
+            ds2.Tables[0].Rows[i][2] = ds.Tables[0].Rows[i][1];
+            }
+
+
+            return ds2;
+
+
+        }
+
+
+        public DataSet AvailableCateringName()
+        {
+            DataSet ds = new DataSet();
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "select Name  from Catering where Deleted='False' ;";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+            SQLConnection.adapter.SelectCommand = SQLConnection.cmd;
+            SQLConnection.adapter.Fill(ds);
+            SQLConnection.cmd.Parameters.Clear();
+            return ds;
+        }
+
+        public decimal GetCateringPrice(string name)
+        {
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "select Price  from Catering where Deleted='False' and Name='"+ name +"';";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+            SQLConnection.conn.Open();
+            decimal a = (decimal)SQLConnection.cmd.ExecuteScalar();
+           
+                
+                // float price = float.Parse(SQLConnection.cmd.ExecuteScalar());
+            SQLConnection.conn.Close();
+            SQLConnection.cmd.Parameters.Clear();
+            return a;
+        }
+        public int NewCatering(int RID,string  Food,int Quan)
+        {
+            int FID;
+
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.conn.Open();
+            SQLConnection.cmd.CommandText = "select F_ID from Catering where Deleted='False' and Name='"+Food+"';";
+            SQLConnection.cmd.CommandType = CommandType.Text;
+            FID = (int)SQLConnection.cmd.ExecuteScalar();
+            SQLConnection.cmd.Parameters.Clear();
+
+
+           
+            SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "New_Room_Catering";
+            SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
+            SQLConnection.cmd.Parameters.Add("@Res_ID", RID);
+            SQLConnection.cmd.Parameters.Add("@F_ID", FID);
+            SQLConnection.cmd.Parameters.Add("@Q", Quan);
+            int suc = SQLConnection.cmd.ExecuteNonQuery();
+            SQLConnection.conn.Close();
+            SQLConnection.cmd.Parameters.Clear();
+            return suc;
+
         }
     }
 }

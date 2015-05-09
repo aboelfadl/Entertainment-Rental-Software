@@ -11,7 +11,7 @@ namespace ERS
 {
     class Search_Model
     {
-        public Boolean GetDataSource(Search s, String table_name)
+        public void GetDataSource(Search s, String table_name)
         {
             SQLConnection.conn.Open();
 
@@ -32,17 +32,9 @@ namespace ERS
             SQLConnection.cmd.CommandType = CommandType.Text;
             SqlDataReader temp = SQLConnection.cmd.ExecuteReader();
 
-            if (temp.HasRows)
-            {
-                s.SetBinding(temp);
-                SQLConnection.conn.Close();
-                return true;
-            }
-            else
-            {
-                SQLConnection.conn.Close();
-                return false;
-            }
+            ((Search)s).SetBinding(temp);
+
+            SQLConnection.conn.Close();
         }
     }
 }
