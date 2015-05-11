@@ -23,7 +23,7 @@ namespace ERS
 
             bindingSource1 = new BindingSource();
 
-            if (!Model.GetDataSource(this, TableName))
+            if (! (Model.GetDataSource(this, TableName)) )
             {
                 MessageBox.Show("No data to show");
             }

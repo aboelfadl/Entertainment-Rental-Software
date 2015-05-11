@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+    using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace ERS
 {
     class Search_Model
     {
-        public void GetDataSource(Search s, String table_name)
+        public Boolean GetDataSource(Search s, String table_name)
         {
             SQLConnection.conn.Open();
 
@@ -31,10 +31,18 @@ namespace ERS
             }
             SQLConnection.cmd.CommandType = CommandType.Text;
             SqlDataReader temp = SQLConnection.cmd.ExecuteReader();
-
-            ((Search)s).SetBinding(temp);
-
-            SQLConnection.conn.Close();
+            if (temp.HasRows)
+            {
+                s.SetBinding(temp);
+                SQLConnection.conn.Close();
+                return true;
+            }
+            else
+            {
+                SQLConnection.conn.Close();
+                return false;
+            }
+           
         }
     }
 }

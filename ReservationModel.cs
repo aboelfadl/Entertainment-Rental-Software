@@ -135,7 +135,15 @@ namespace ERS
                 SQLConnection.cmd.CommandType = CommandType.Text;
                 SQLConnection.cmd.CommandText = "SELECT Res_ID from Reservation where R_ID=" + Room_ID.ToString() + "AND ENDTIME is NULL";
                 SQLConnection.conn.Open();
-                int Res_ID = (int)SQLConnection.cmd.ExecuteScalar();
+                int Res_ID;
+                try
+                {
+                     Res_ID = (int)SQLConnection.cmd.ExecuteScalar();
+                }
+                catch
+                {
+                    Res_ID = 0;
+                }
                 SQLConnection.conn.Close();
                 if(Res_ID > 0)
                 {
@@ -259,6 +267,7 @@ namespace ERS
 
         public decimal GetCateringPrice(string name)
         {
+            if (name == "") return -1;
             SQLConnection.cmd.Parameters.Clear();
             SQLConnection.cmd.CommandText = "select Price  from Catering where Deleted='False' and Name='"+ name +"';";
             SQLConnection.cmd.CommandType = CommandType.Text;

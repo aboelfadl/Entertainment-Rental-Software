@@ -172,7 +172,7 @@ namespace ERS
         {
 
             int R_ID, C_ID;
-            if(CustomerID==-1)
+            if(CustomerID==-1 || custName_txt.Text=="")
             {
                 MessageBox.Show("Please choose a customer first by adding their mobile number and clicking search.");
                 return;
@@ -271,6 +271,10 @@ namespace ERS
         
         private void Room_Changed(object sender, EventArgs e)
         {
+           
+            dataGridView1.DataSource = null;
+            CustomerID = -1;
+            ReservationID = -1;
             DataSet ds = Model.ChangeRoomModel(room_combobox.Text);
 
             if (ds.Tables[0].Rows.Count == 0)
@@ -295,6 +299,41 @@ namespace ERS
                 custNum_txt.Text = ds2.Tables[0].Rows[0][1].ToString();
                 
                 DataSet ds3 = Model.CateringUsed(ReservationID);
+               if(ds3.Tables.Count==0)
+               {
+
+                   dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(Trial);
+
+                   dataGridView1.Columns.Add("Name", "Name");
+                   dataGridView1.Columns.Add("Price", "Price");
+                   dataGridView1.Columns.Add("Quantity", "Quantity");
+                   dataGridView1.Rows.Add();
+
+                   DataGridViewComboBoxCell combocatering = new DataGridViewComboBoxCell();
+                   DataSet ds6 = Model.AvailableCateringName();
+                   combocatering.DataSource = ds6.Tables[0];
+                   combocatering.ValueMember = "Name";
+                   combocatering.Value = "";
+                   dataGridView1.Rows[0].Cells[0] = combocatering;
+                   
+
+                   DataGridViewComboBoxCell combocatering2 = new DataGridViewComboBoxCell();
+                   for (int i = 1; i < 11; i++)
+                   {
+                       combocatering2.Items.Add(i.ToString());
+                   }
+                   combocatering2.Value = "";
+                   dataGridView1.Rows[0].Cells[2] = combocatering2;
+                   return;
+               }
+ 
+                if(dataGridView1.Columns.Count!=0)
+                {
+                    for (int i = dataGridView1.Columns.Count-1; i >= 0; i--)
+                    {
+                        dataGridView1.Columns.RemoveAt(i);
+                    }
+                }
                 dataGridView1.DataSource = ds3.Tables[0];
                 for (int i = 0; i < dataGridView1.Rows.Count; i++)
 			{
@@ -309,11 +348,11 @@ namespace ERS
  
               cmb.DataSource = ds4.Tables[0];
               cmb.ValueMember = "Name";
-              
 
+              cmb.Value = "";
                 dataGridView1.Rows[dataGridView1.Rows.Count-1].Cells[0] = cmb;
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[0].ReadOnly = false;
-                cmb.Value = null;
+                
 
 
                 DataGridViewComboBoxCell cmb2 = new DataGridViewComboBoxCell();
@@ -321,7 +360,7 @@ namespace ERS
                 {
                     cmb2.Items.Add(i.ToString());
                 }
-                cmb2.Value = null;
+                cmb2.Value = "";
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2] = cmb2;
                 dataGridView1.Rows[dataGridView1.Rows.Count - 1].Cells[2].ReadOnly = false;
                 dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(Trial);
@@ -333,30 +372,40 @@ namespace ERS
 
         private void Trial(object sender, DataGridViewCellEventArgs e)
         {
-          //  dataGridView1.AllowUserToAddRows = false;
             DataGridViewCell cell = dataGridView1.CurrentCell;
 
             if(cell.ColumnIndex==0)
             {
+                if (dataGridView1.Rows[cell.RowIndex].Cells[2].Value.ToString()=="") 
+                    dataGridView1.AllowUserToAddRows = false;
+
                 decimal price = Model.GetCateringPrice(cell.Value.ToString());
                 dataGridView1.Rows[cell.RowIndex].Cells[1].Value = price;
             }
             else if(cell.ColumnIndex==2)
             {
-                if(dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString()=="")
+              
+                if ( dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString() == "")
                 {
-                    MessageBox.Show("Please choose a product first then the quantity.");
-                    cell.Value = null;
+                 //   cell.Value = null;
+                    if(cell.Value!="")MessageBox.Show("Please choose a product first then the quantity.");
+                   // DataGridViewComboBoxCell T = cell as DataGridViewComboBoxCell;
+                  //  T.Value = "";
+                   
+                    cell.Value = "";
+                   
                     return;
                 }
+
                int suc =  Model.NewCatering(ReservationID, dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString(), int.Parse(cell.Value.ToString()));
                 if(suc ==1 )
                 {
                     MessageBox.Show("Catering Added successfully");
                     object S = new object();
                     EventArgs EV = new EventArgs();
-                  //  dataGridView1.AllowUserToAddRows = true;
-                    Room_Changed(S,EV);
+                    dataGridView1.AllowUserToAddRows = true;
+                    dataGridView1.DataSource = null;
+                     Room_Changed(S,EV);
                     return;
                 }
                 else

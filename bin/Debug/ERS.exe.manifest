@@ -143,14 +143,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERS.exe" size="1036800">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ERS.exe" size="1041880">
       <assemblyIdentity name="ERS" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>bvm6YAp64aircqL6IqiJx7IDWx/EvW9/9UxPvQyjlkY=</dsig:DigestValue>
+        <dsig:DigestValue>gWHFfSjiVGmnYi0OFlUINZqJt4eUBRFkhqYFAnQOPRE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
