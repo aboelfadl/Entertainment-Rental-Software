@@ -79,3 +79,6 @@ C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.exe
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.pdb
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\bin\Debug\ERS.pdb
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.csprojResolveAssemblyReference.cache
+C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.exe.config
+C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.exe
+C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.pdb

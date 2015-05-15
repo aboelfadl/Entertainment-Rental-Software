@@ -337,3 +337,18 @@ SELECT R_ID
 FROM Reservation
 where EndTime=NULL AND R_ID=@R_ID;
 GO
+----------------------------------------------------------------------------------------
+IF object_id('Edit_User') IS NULL
+ EXEC ('create procedure Edit_User as select 1')
+ GO
+
+Alter Procedure Edit_User
+@U_ID varchar(255),
+@Password varchar(255),
+@Salary money,
+@type varchar(255)
+AS	
+UPDATE [USER]
+Set PW=@Password , Salary=@Salary , type=@type
+where U_ID=@U_ID ;
+GO
