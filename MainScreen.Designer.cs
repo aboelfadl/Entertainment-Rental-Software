@@ -46,6 +46,8 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.status_lbl = new System.Windows.Forms.ToolStripStatusLabel();
+            this.LabelType = new System.Windows.Forms.ToolStripStatusLabel();
+            this.expensesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -57,7 +59,8 @@
             this.mainToolStripMenuItem,
             this.reservationsToolStripMenuItem,
             this.roomsStatusToolStripMenuItem,
-            this.financeToolStripMenuItem});
+            this.financeToolStripMenuItem,
+            this.expensesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(858, 24);
@@ -82,35 +85,35 @@
             // customerToolStripMenuItem
             // 
             this.customerToolStripMenuItem.Name = "customerToolStripMenuItem";
-            this.customerToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.customerToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.customerToolStripMenuItem.Text = "Customers";
             this.customerToolStripMenuItem.Click += new System.EventHandler(this.customerToolStripMenuItem_Click);
             // 
             // roomToolStripMenuItem
             // 
             this.roomToolStripMenuItem.Name = "roomToolStripMenuItem";
-            this.roomToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.roomToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.roomToolStripMenuItem.Text = "Rooms";
             this.roomToolStripMenuItem.Click += new System.EventHandler(this.roomToolStripMenuItem_Click);
             // 
             // cateringToolStripMenuItem
             // 
             this.cateringToolStripMenuItem.Name = "cateringToolStripMenuItem";
-            this.cateringToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cateringToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.cateringToolStripMenuItem.Text = "Catering";
             this.cateringToolStripMenuItem.Click += new System.EventHandler(this.cateringToolStripMenuItem_Click);
             // 
             // usersToolStripMenuItem
             // 
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
-            this.usersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.usersToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.usersToolStripMenuItem.Text = "Users";
             this.usersToolStripMenuItem.Click += new System.EventHandler(this.usersToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.logoutToolStripMenuItem.Text = "Logout";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
@@ -174,7 +177,8 @@
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripStatusLabel1,
-            this.status_lbl});
+            this.status_lbl,
+            this.LabelType});
             this.statusStrip1.Location = new System.Drawing.Point(0, 344);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(858, 22);
@@ -193,6 +197,21 @@
             this.status_lbl.ForeColor = System.Drawing.Color.Black;
             this.status_lbl.Name = "status_lbl";
             this.status_lbl.Size = new System.Drawing.Size(0, 17);
+            // 
+            // LabelType
+            // 
+            this.LabelType.ForeColor = System.Drawing.Color.Black;
+            this.LabelType.Name = "LabelType";
+            this.LabelType.Size = new System.Drawing.Size(41, 17);
+            this.LabelType.Text = "Empty";
+            // 
+            // expensesToolStripMenuItem
+            // 
+            this.expensesToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
+            this.expensesToolStripMenuItem.Name = "expensesToolStripMenuItem";
+            this.expensesToolStripMenuItem.Size = new System.Drawing.Size(66, 20);
+            this.expensesToolStripMenuItem.Text = "Expenses";
+            this.expensesToolStripMenuItem.Click += new System.EventHandler(this.Expenses);
             // 
             // MainScreen
             // 
@@ -240,6 +259,8 @@
         private System.Windows.Forms.ToolStripMenuItem cateringReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem revenueReportToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem logoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel LabelType;
+        private System.Windows.Forms.ToolStripMenuItem expensesToolStripMenuItem;
 
     }
 }

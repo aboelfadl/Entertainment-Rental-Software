@@ -398,7 +398,7 @@ namespace ERS
                 }
 
                int suc =  Model.NewCatering(ReservationID, dataGridView1.Rows[cell.RowIndex].Cells[0].Value.ToString(), int.Parse(cell.Value.ToString()));
-                if(suc ==1 )
+                if(suc >=1 )
                 {
                     MessageBox.Show("Catering Added successfully");
                     object S = new object();
@@ -406,6 +406,17 @@ namespace ERS
                     dataGridView1.AllowUserToAddRows = true;
                     dataGridView1.DataSource = null;
                      Room_Changed(S,EV);
+                    return;
+                }
+                else if(suc ==-1)
+                {
+                    MessageBox.Show("Quantity is larger than stock");
+                    dataGridView1.CellValueChanged -= new DataGridViewCellEventHandler(Trial);
+                    cell.Value = "";
+                    dataGridView1.Rows[cell.RowIndex].Cells[0].Value = "";
+                    dataGridView1.Rows[cell.RowIndex].Cells[1].Value = 0;
+                    dataGridView1.CellValueChanged += new DataGridViewCellEventHandler(Trial);
+                   
                     return;
                 }
                 else

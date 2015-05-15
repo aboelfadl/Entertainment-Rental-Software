@@ -71,3 +71,11 @@ PW    varchar(255),
 Salary money  
 )
 go
+if not exists (select * from sysobjects where name='Expense' and xtype='U')
+create table [Expense]
+(
+Description  varchar(255) NOT NULL,
+Paid    money NOT NULL
+[ExpenseTime] varchar(255) NOT NULL
+)
+go

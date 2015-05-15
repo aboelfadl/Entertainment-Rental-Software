@@ -96,9 +96,6 @@ namespace ERS
         }
 
 
-
-
-
         private void DeleteUser(object sender, EventArgs e)
         {
             
@@ -126,8 +123,6 @@ namespace ERS
 
         }
 
-        
-        
 
         private void Users_Load(object sender, EventArgs e)
         {
@@ -190,12 +185,6 @@ namespace ERS
             
         
         }
-
-
-
-
-
-
 
     }
 }

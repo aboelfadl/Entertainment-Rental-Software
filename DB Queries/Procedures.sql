@@ -352,3 +352,126 @@ UPDATE [USER]
 Set PW=@Password , Salary=@Salary , type=@type
 where U_ID=@U_ID ;
 GO
+----------------------------------------------------------------------------------------
+IF object_id('LoginU') IS NULL
+ EXEC ('create procedure LoginU as select 1')
+ GO
+
+Alter Procedure LoginU
+@ID varchar(255),
+@PW varchar(255)
+AS
+SELECT [type] from [User] where U_ID=@ID and PW=@PW;
+GO
+----------------------------------------------------------------------------------------
+IF object_id('NewExpense') IS NULL
+ EXEC ('create procedure NewExpense as select 1')
+ GO
+
+Alter Procedure NewExpense
+@Descr varchar(255),
+@Cost money,
+@DateT smalldatetime
+AS
+INSERT INTO  [Expense]
+          ( 
+            Description                   ,
+            Paid                     ,
+            ExpenseTime                                            
+          ) 
+     VALUES 
+          ( 
+            @Descr                   ,
+            @Cost                     ,
+            @DateT                                    
+	    	)
+go
+----------------------------------------------------------------------------------------------
+IF object_id('New_Room_Catering') IS NULL
+ EXEC ('create procedure New_Room_Catering as select 1')
+ GO
+
+ALTER Procedure New_Room_Catering
+@Res_ID int,
+@F_ID int,
+@Q int
+AS	
+Insert into Room_Catering
+(
+Res_ID,
+F_ID ,
+Quantity
+)
+VALUES
+(
+@Res_ID,
+@F_ID,
+@Q
+)
+
+Update Catering
+set Stock=Stock- @Q
+where F_ID=@F_ID;
+go
+-------------------------------------------------------------------------------------------------------------------
+IF object_id('Catering_Price') IS NULL
+ EXEC ('create procedure Catering_Price as select 1')
+ GO
+ALTER Procedure Catering_Price
+ @Name   varchar(255),
+ @New_Price money
+ As
+ UPDATE [Catering]
+SET Price=@New_Price
+WHERE Name=@Name; 
+---------------------------------------------------------------------------------------------------------------------
+IF object_id('GetReservationsProfit') IS NULL
+ EXEC ('create procedure GetReservationsProfit as select 1')
+ GO
+ALTER Procedure GetReservationsProfit
+@StartTime smalldatetime
+AS
+select Room.R_ID ,sum(((Room.Price/60)*DATEDIFF(minute,Reservation.StartTime, Reservation.EndTime))) As Profit 	
+From Room
+INNER JOIN Reservation on Room.R_ID=Reservation.R_ID
+where Reservation.EndTime is NOT NULL and Reservation.StartTime>=@StartTime
+Group by Room.R_ID
+GO
+---------------------------------------------------------------------------------------------------------------------
+IF object_id('GetCateringProfit') IS NULL
+ EXEC ('create procedure GetCateringProfit as select 1')
+ GO
+ALTER Procedure GetCateringProfit
+@StartTime smalldatetime
+AS
+select Catering.Name,sum(Catering.Price*Room_Catering.Quantity) As profit 
+from Room_Catering
+Inner Join Catering on Room_Catering.F_ID=Catering.F_ID
+Inner Join Reservation on Reservation.Res_ID=Room_Catering.Res_ID
+where Reservation.EndTime is NOT NULL and Reservation.StartTime>=@StartTime
+Group by Catering.Name
+------------------------------------------------------------------------------------------------------------------------
+IF object_id('GetCateringPaid') IS NULL
+ EXEC ('create procedure GetCateringPaid as select 1')
+ GO
+ALTER Procedure GetCateringPaid
+@StartTime smalldatetime
+AS
+select Catering.Name,sum(Catering.Cost*Room_Catering.Quantity) As profit 
+from Room_Catering
+Inner Join Catering on Room_Catering.F_ID=Catering.F_ID
+Inner Join Reservation on Reservation.Res_ID=Room_Catering.Res_ID
+where Reservation.EndTime is NOT NULL and Reservation.StartTime>=@StartTime
+Group by Catering.Name
+------------------------------------------------------------------------------------------------------------------------
+IF object_id('GetExpensePaid') IS NULL
+ EXEC ('create procedure GetExpensePaid as select 1')
+ GO
+ALTER Procedure GetExpensePaid
+@StartTime smalldatetime
+AS
+select Expense.Description ,sum(paid)as Paid
+from Expense
+where ExpenseTime >=@StartTime
+group by Expense.Description
+-----------------------------------------------------------------------------------------------------------------------

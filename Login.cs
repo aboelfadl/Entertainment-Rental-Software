@@ -7,16 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-
+using System.Data;
 namespace ERS
 {
     public partial class Login : Form
     {
         public string ID { get; set; }
-
+        Login_Model Model;
         public Login()
         {
             InitializeComponent();
+            Model = new Login_Model();
             this.BackColor = Color.LimeGreen;
             this.TransparencyKey = Color.LimeGreen;
             //button1.BackColor = Color.LimeGreen;
@@ -47,17 +48,34 @@ namespace ERS
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if(ID=="Admin" || ID=="User")
-            {
-                MainScreen main = new MainScreen(ID);
-                this.Hide();
-                main.Show();
-            }
-            else
-            {
-                MessageBox.Show("Account not found");
-                return;
-            }
+            
+           int Try = Model.TryLogin(username_txt.Text, password_txt.Text);
+           if (Try == -1)
+           {
+               MessageBox.Show("Login credentials couldn't be matched,Check if username and password exists");
+               username_txt.Text = ""; 
+               password_txt.Text = "";
+               return;
+           }
+           else
+           {
+               if (Try == 0)
+               {
+                   MainScreen main = new MainScreen("User",username_txt.Text);
+                   main.Show();
+                   this.Hide();
+               }
+               else if(Try ==1)
+               {
+                   MainScreen main = new MainScreen("Admin", username_txt.Text);
+                   main.Show();
+                   this.Hide();
+               }
+              
+
+           }
+            
+            
         }
     }
 }

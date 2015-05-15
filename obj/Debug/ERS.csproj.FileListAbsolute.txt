@@ -60,6 +60,7 @@ C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Caterin
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Catering_Report.resources
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Customers.resources
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Customer_Bill.resources
+C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Expenses.resources
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Login.resources
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.Report_Display.resources
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.SplashScreen.resources
@@ -79,6 +80,3 @@ C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.exe
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.pdb
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\bin\Debug\ERS.pdb
 C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\obj\Debug\ERS.csprojResolveAssemblyReference.cache
-C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\bin\Debug\ERS.exe.config
-C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.exe
-C:\Users\Mohamed\Documents\GitHub\Entertainment-Rental-Software\obj\Debug\ERS.pdb

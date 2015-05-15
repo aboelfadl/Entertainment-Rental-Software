@@ -13,10 +13,13 @@ namespace ERS
     public partial class MainScreen : Form
     {
         private string user;
-        public MainScreen(string current)
+        private string username;
+        public MainScreen(string current,string username)
         {
             InitializeComponent();
             this.user = current;
+            this.username = username;
+            this.LabelType.Text = username;
         }
 
         private void customerToolStripMenuItem_Click(object sender, EventArgs e)
@@ -130,6 +133,19 @@ namespace ERS
             Login Main = new Login();
             Main.Show();
             this.Hide();
+        }
+
+        private void Expenses(object sender, EventArgs e)
+        {
+            if (user != "Admin")
+            {
+                MessageBox.Show("Current operation is not permitted for your account");
+                return;
+            }
+            Expenses rev = new Expenses();
+            rev.MdiParent = this;
+            
+            rev.Show();
         }
     }
 }

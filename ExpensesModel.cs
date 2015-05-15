@@ -6,20 +6,21 @@ using System.Threading.Tasks;
 using System.Data;
 namespace ERS
 {
-    class Login_Model
+    class ExpensesModel
     {
-        public int TryLogin(string ID,string PW )
+        public int SubmitExpense(string Desc,double Price,DateTime Date)
         {
-            string type;
             SQLConnection.cmd.Parameters.Clear();
+            SQLConnection.cmd.CommandText = "NewExpense";
             SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.cmd.CommandText = "LoginU";
-            SQLConnection.cmd.Parameters.AddWithValue("@ID",ID);
-            SQLConnection.cmd.Parameters.AddWithValue("@PW", PW);
             SQLConnection.conn.Open();
+            SQLConnection.cmd.Parameters.AddWithValue("@Descr", Desc);
+            SQLConnection.cmd.Parameters.AddWithValue("@Cost", Price);
+            SQLConnection.cmd.Parameters.AddWithValue("@DateT", Date);
+            int effected = 0;
             try
             {
-                type = SQLConnection.cmd.ExecuteScalar().ToString();
+               effected =  SQLConnection.cmd.ExecuteNonQuery();
             }
             catch
             {
@@ -27,13 +28,10 @@ namespace ERS
                 SQLConnection.cmd.Parameters.Clear();
                 return -1;
             }
-            
             SQLConnection.conn.Close();
             SQLConnection.cmd.Parameters.Clear();
-            if (type == "User") return 0;
-            if (type == "Admin") return 1;
+            return effected;
 
-            return -1;
         }
     }
 }

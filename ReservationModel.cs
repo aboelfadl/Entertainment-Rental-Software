@@ -282,13 +282,23 @@ namespace ERS
         }
         public int NewCatering(int RID,string  Food,int Quan)
         {
-            int FID;
+            int FID = -1 ;
 
             SQLConnection.cmd.Parameters.Clear();
             SQLConnection.conn.Open();
-            SQLConnection.cmd.CommandText = "select F_ID from Catering where Deleted='False' and Name='"+Food+"';";
+            SQLConnection.cmd.CommandText = "select F_ID from Catering where Deleted='False' and Name='"+Food+"' and Stock>"+Quan.ToString();
             SQLConnection.cmd.CommandType = CommandType.Text;
-            FID = (int)SQLConnection.cmd.ExecuteScalar();
+           
+            try
+            {
+                FID = (int)SQLConnection.cmd.ExecuteScalar();
+            }
+            catch
+            {
+                SQLConnection.conn.Close();
+                SQLConnection.cmd.Parameters.Clear();
+                return -1;
+            }
             SQLConnection.cmd.Parameters.Clear();
 
 
@@ -296,9 +306,9 @@ namespace ERS
             SQLConnection.cmd.Parameters.Clear();
             SQLConnection.cmd.CommandText = "New_Room_Catering";
             SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.cmd.Parameters.Add("@Res_ID", RID);
-            SQLConnection.cmd.Parameters.Add("@F_ID", FID);
-            SQLConnection.cmd.Parameters.Add("@Q", Quan);
+            SQLConnection.cmd.Parameters.AddWithValue("@Res_ID", RID);
+            SQLConnection.cmd.Parameters.AddWithValue("@F_ID", FID);
+            SQLConnection.cmd.Parameters.AddWithValue("@Q", Quan);
             int suc = SQLConnection.cmd.ExecuteNonQuery();
             SQLConnection.conn.Close();
             SQLConnection.cmd.Parameters.Clear();

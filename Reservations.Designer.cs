@@ -148,7 +148,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(132, 16);
             this.label6.TabIndex = 10;
-            this.label6.Text = "Time Fromat HH:MM";
+            this.label6.Text = "Time Format HH:MM";
             // 
             // end_txt
             // 
