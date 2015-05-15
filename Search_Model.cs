@@ -26,7 +26,7 @@ namespace ERS
             }
             else
             {
-                SQLConnection.cmd.CommandText = "Select * from " + table_name;
+                SQLConnection.cmd.CommandText = "Select * from  \"" + table_name + "\"";
                 
             }
             SQLConnection.cmd.CommandType = CommandType.Text;

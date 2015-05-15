@@ -42,7 +42,7 @@ namespace ERS
 
             ReportDocument myReportDocument;
             myReportDocument = new ReportDocument();
-            myReportDocument.Load(@"D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Reports\Room_Report.rpt");
+            myReportDocument.Load(@"C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\Reports\Room_Report.rpt");
             myReportDocument.SetDatabaseLogon("ers_user", "12345");
             myReportDocument.SetParameterValue("fromDate", fromDate);
             myReportDocument.SetParameterValue("toDate", toDate);
@@ -79,7 +79,7 @@ namespace ERS
             
             ReportDocument myReportDocument;
             myReportDocument = new ReportDocument();
-            myReportDocument.Load(@"D:\Documents\CUFE\Semester 8 - Spring 2015\Software Engineering\Project\Reports\Rooms_Report.rpt");
+            myReportDocument.Load(@"C:\Users\Mohamed\Documents\Visual Studio 2013\Projects\ERS\Reports\Rooms_Report.rpt");
             myReportDocument.SetDatabaseLogon("ers_user", "12345");
             myReportDocument.SetParameterValue("fromDate", fromDate);
             myReportDocument.SetParameterValue("toDate", toDate);

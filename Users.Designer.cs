@@ -34,21 +34,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.new_btn = new System.Windows.Forms.Button();
             this.delete_btn = new System.Windows.Forms.Button();
-            this.ChangePW_button = new System.Windows.Forms.Button();
             this.Search_Button = new System.Windows.Forms.Button();
             this.confirm_txt = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.type_txt = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.salary_txt = new System.Windows.Forms.TextBox();
-            this.ChangeSalary_button = new System.Windows.Forms.Button();
+            this.edit_button = new System.Windows.Forms.Button();
+            this.type_txt = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // password_txt
             // 
             this.password_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password_txt.Location = new System.Drawing.Point(169, 108);
+            this.password_txt.MaxLength = 50;
             this.password_txt.Name = "password_txt";
             this.password_txt.PasswordChar = '*';
             this.password_txt.Size = new System.Drawing.Size(284, 22);
@@ -58,6 +58,7 @@
             // 
             this.username_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.username_txt.Location = new System.Drawing.Point(169, 54);
+            this.username_txt.MaxLength = 50;
             this.username_txt.Name = "username_txt";
             this.username_txt.Size = new System.Drawing.Size(284, 22);
             this.username_txt.TabIndex = 27;
@@ -98,24 +99,13 @@
             // delete_btn
             // 
             this.delete_btn.ForeColor = System.Drawing.Color.Black;
-            this.delete_btn.Location = new System.Drawing.Point(277, 279);
+            this.delete_btn.Location = new System.Drawing.Point(354, 279);
             this.delete_btn.Name = "delete_btn";
             this.delete_btn.Size = new System.Drawing.Size(75, 23);
             this.delete_btn.TabIndex = 21;
             this.delete_btn.Text = "Delete";
             this.delete_btn.UseVisualStyleBackColor = true;
             this.delete_btn.Click += new System.EventHandler(this.DeleteUser);
-            // 
-            // ChangePW_button
-            // 
-            this.ChangePW_button.ForeColor = System.Drawing.Color.Black;
-            this.ChangePW_button.Location = new System.Drawing.Point(174, 279);
-            this.ChangePW_button.Name = "ChangePW_button";
-            this.ChangePW_button.Size = new System.Drawing.Size(75, 23);
-            this.ChangePW_button.TabIndex = 20;
-            this.ChangePW_button.Text = "Change PW";
-            this.ChangePW_button.UseVisualStyleBackColor = true;
-            this.ChangePW_button.Click += new System.EventHandler(this.ChangePW);
             // 
             // Search_Button
             // 
@@ -130,10 +120,11 @@
             // confirm_txt
             // 
             this.confirm_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.confirm_txt.Location = new System.Drawing.Point(207, 154);
+            this.confirm_txt.Location = new System.Drawing.Point(169, 154);
+            this.confirm_txt.MaxLength = 50;
             this.confirm_txt.Name = "confirm_txt";
             this.confirm_txt.PasswordChar = '*';
-            this.confirm_txt.Size = new System.Drawing.Size(246, 22);
+            this.confirm_txt.Size = new System.Drawing.Size(284, 22);
             this.confirm_txt.TabIndex = 30;
             // 
             // label4
@@ -143,9 +134,9 @@
             this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(34, 154);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(167, 16);
+            this.label4.Size = new System.Drawing.Size(116, 16);
             this.label4.TabIndex = 29;
-            this.label4.Text = "Change/Confirm Password";
+            this.label4.Text = "Confirm Password";
             // 
             // label5
             // 
@@ -157,14 +148,6 @@
             this.label5.Size = new System.Drawing.Size(40, 16);
             this.label5.TabIndex = 32;
             this.label5.Text = "Type";
-            // 
-            // type_txt
-            // 
-            this.type_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.type_txt.Location = new System.Drawing.Point(169, 197);
-            this.type_txt.Name = "type_txt";
-            this.type_txt.Size = new System.Drawing.Size(284, 22);
-            this.type_txt.TabIndex = 33;
             // 
             // label1
             // 
@@ -181,30 +164,42 @@
             // 
             this.salary_txt.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.salary_txt.Location = new System.Drawing.Point(169, 238);
+            this.salary_txt.MaxLength = 50;
             this.salary_txt.Name = "salary_txt";
             this.salary_txt.Size = new System.Drawing.Size(284, 22);
             this.salary_txt.TabIndex = 35;
             // 
-            // ChangeSalary_button
+            // edit_button
             // 
-            this.ChangeSalary_button.ForeColor = System.Drawing.Color.Black;
-            this.ChangeSalary_button.Location = new System.Drawing.Point(373, 279);
-            this.ChangeSalary_button.Name = "ChangeSalary_button";
-            this.ChangeSalary_button.Size = new System.Drawing.Size(99, 23);
-            this.ChangeSalary_button.TabIndex = 36;
-            this.ChangeSalary_button.Text = "Change Salary";
-            this.ChangeSalary_button.UseVisualStyleBackColor = true;
-            this.ChangeSalary_button.Click += new System.EventHandler(this.ChangeSalary);
+            this.edit_button.ForeColor = System.Drawing.Color.Black;
+            this.edit_button.Location = new System.Drawing.Point(207, 279);
+            this.edit_button.Name = "edit_button";
+            this.edit_button.Size = new System.Drawing.Size(75, 23);
+            this.edit_button.TabIndex = 36;
+            this.edit_button.Text = "Edit";
+            this.edit_button.UseVisualStyleBackColor = true;
+            this.edit_button.Click += new System.EventHandler(this.EditUser);
+            // 
+            // type_txt
+            // 
+            this.type_txt.FormattingEnabled = true;
+            this.type_txt.Items.AddRange(new object[] {
+            "Admin",
+            "User"});
+            this.type_txt.Location = new System.Drawing.Point(169, 198);
+            this.type_txt.Name = "type_txt";
+            this.type_txt.Size = new System.Drawing.Size(284, 21);
+            this.type_txt.TabIndex = 37;
             // 
             // Users
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(484, 329);
-            this.Controls.Add(this.ChangeSalary_button);
+            this.Controls.Add(this.type_txt);
+            this.Controls.Add(this.edit_button);
             this.Controls.Add(this.salary_txt);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.type_txt);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.confirm_txt);
             this.Controls.Add(this.label4);
@@ -214,12 +209,12 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.new_btn);
             this.Controls.Add(this.delete_btn);
-            this.Controls.Add(this.ChangePW_button);
             this.Controls.Add(this.Search_Button);
             this.Name = "Users";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Users";
+            this.Load += new System.EventHandler(this.Users_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -233,14 +228,13 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button new_btn;
         private System.Windows.Forms.Button delete_btn;
-        private System.Windows.Forms.Button ChangePW_button;
         private System.Windows.Forms.Button Search_Button;
         private System.Windows.Forms.TextBox confirm_txt;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox type_txt;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox salary_txt;
-        private System.Windows.Forms.Button ChangeSalary_button;
+        private System.Windows.Forms.Button edit_button;
+        private System.Windows.Forms.ComboBox type_txt;
     }
 }

@@ -13,32 +13,47 @@ namespace ERS
     public partial class Users : Form
     {
 
-        public string ID { get; set; }
-        public string PW { get; set; }
 
-        public string Type { get; set; }
+        private Users_Model Model;
 
-        public int Salary { get; set; }
+        public Label Info;
 
         public Users()
         {
             InitializeComponent();
-            username_txt.DataBindings.Add("Text", this, "ID");
-            password_txt.DataBindings.Add("Text", this, "PW");
-            type_txt.DataBindings.Add("Text", this, "Type");
-            salary_txt.DataBindings.Add("Text", this, "Salary");
-   
+            Info = new Label();
+            Info.Hide();
+            Info.Name = "Info";
+            Info.TextChanged += Info_TextChanged;
+            this.Controls.Add(Info);
+            Model = new Users_Model();
+            type_txt.SelectedItem = null;
         }
 
-        private void Search_Click(object sender, EventArgs e)
+        private void Info_TextChanged(object sender, EventArgs e)
         {
-            Search s = new Search("User");
-            s.MdiParent = this.MdiParent;
-            s.Show();
+            this.Show();
+            string SID = Info.Text;
+            string[] Data = new string[10];
+            Model.SearchUserModel(SID, Data);
+
+            username_txt.Text = Data[0];
+            password_txt.Text = Data[1];
+            confirm_txt.Text = Data[1];
+            type_txt.Text = Data[2];
+            salary_txt.Text = Data[3];
+            
         }
+
+
 
         private void AddUser(object sender, EventArgs e)
         {
+            if(password_txt.Text=="" || username_txt.Text=="" || salary_txt.Text=="" || type_txt.Text=="")
+            {
+                MessageBox.Show("Some of the Required data was not provided, Please check the entered data");
+                return;
+            }
             if(password_txt.Text!=confirm_txt.Text)
             {
                 MessageBox.Show("Error Passwords don't match !!");
@@ -46,69 +61,141 @@ namespace ERS
                 confirm_txt.Text = "";
                 return;
             }
-            SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "Create_User";
-            SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.conn.Open();
-            SQLConnection.cmd.Parameters.AddWithValue("@ID", ID);
-            SQLConnection.cmd.Parameters.AddWithValue("@PW", PW);
-            SQLConnection.cmd.Parameters.AddWithValue("@Type", Type);
-            SQLConnection.cmd.Parameters.AddWithValue("@Salary", Salary);
-            SQLConnection.cmd.ExecuteNonQuery();
-            SQLConnection.conn.Close();
-            SQLConnection.cmd.Parameters.Clear();
-            MessageBox.Show("User Created successfully !");
+            if( ! (type_txt.Text=="User" || type_txt.Text=="Admin"))
+            {
+                MessageBox.Show("Please select a valid Account type");
+                return;
+            }
+            try
+            {
+                double Sal = Double.Parse(salary_txt.Text);
+                if (Sal <= 0) throw new System.ArgumentException("Parameter cannot be null", "original");            
+            }
+            catch
+            {
+                MessageBox.Show("Invalid Salary, Salary must be a positive Integer");
+                return;
+            }
+                
+                int T = Model.AddUserModel(username_txt.Text, password_txt.Text, type_txt.Text, Double.Parse(salary_txt.Text));
+           
+            if(T==-1)
+            {
+                MessageBox.Show("Failed to create user , Check if ID is not already used");
+                return;
+            }
+            else if (T == 1)
+            {
+                MessageBox.Show("User Created successfully !");
+                Users C2 = new Users();
+                C2.Show();
+                this.Close();
+                return;
+            }
+
         }
+
+
+
+
 
         private void DeleteUser(object sender, EventArgs e)
         {
-            SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "Delete_User";
-            SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.conn.Open();
-            SQLConnection.cmd.Parameters.AddWithValue("@ID", ID);
-            SQLConnection.cmd.Parameters.AddWithValue("@PW", PW);
-            SQLConnection.cmd.ExecuteNonQuery();
-            SQLConnection.conn.Close();
-            SQLConnection.cmd.Parameters.Clear();
-            MessageBox.Show("User Deleted successfully !");
+            
+            if(username_txt.Text=="" || password_txt.Text=="")
+            {
+                MessageBox.Show("Username or Password wasn't provided ,Please recheck them");
+                return;
+            }
+            
+         int Test = Model.DeleteUserModel(username_txt.Text, password_txt.Text);
+
+            if(Test==-1  || Test==0)
+            {
+                MessageBox.Show("Failed to delete User, Check if user exists.");
+                return;
+            }
+            else if (Test==1)
+            {
+                MessageBox.Show("User Deleted Successfully");
+                Users C2 = new Users();
+                C2.Show();
+                this.Close();
+                return; 
+            }
+
         }
 
-        private void ChangePW(object sender, EventArgs e)
+        
+        
+
+        private void Users_Load(object sender, EventArgs e)
         {
-            SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "Change_PW";
-            SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.conn.Open();
-            SQLConnection.cmd.Parameters.AddWithValue("@ID", ID);
-            SQLConnection.cmd.Parameters.AddWithValue("@Old_PW", PW);
-            string NewPW = confirm_txt.Text;
-            SQLConnection.cmd.Parameters.AddWithValue("@New_PW",NewPW);
-            SQLConnection.cmd.ExecuteNonQuery();
-            SQLConnection.conn.Close();
-            SQLConnection.cmd.Parameters.Clear();
-            MessageBox.Show("Password changed successfully !");
+
         }
-        private void ChangeSalary(object sender, EventArgs e)
+        private void Search_Click(object sender, EventArgs e)
         {
-            SQLConnection.cmd.Parameters.Clear();
-            SQLConnection.cmd.CommandText = "Change_Salary";
-            SQLConnection.cmd.CommandType = CommandType.StoredProcedure;
-            SQLConnection.conn.Open();
-            SQLConnection.cmd.Parameters.AddWithValue("@ID", ID);
-            SQLConnection.cmd.Parameters.AddWithValue("@Salary", Salary);
-            SQLConnection.cmd.ExecuteNonQuery();
-            SQLConnection.conn.Close();
-            SQLConnection.cmd.Parameters.Clear();
-            MessageBox.Show("Salary successfully !");
+            Search s = new Search("User");
+            s.y = this;
+            s.MdiParent = this.MdiParent;
+            this.Hide();
+            s.Show();
         }
 
-     
+        private void EditUser(object sender, EventArgs e)
+        {
+            if (password_txt.Text == "" || username_txt.Text == "" || salary_txt.Text == "" || type_txt.Text == "")
+            {
+                MessageBox.Show("Some of the Required data was not provided, Please check the entered data");
+                return;
+            }
+            if (password_txt.Text != confirm_txt.Text)
+            {
+                MessageBox.Show("Error Passwords don't match !!");
+                password_txt.Text = "";
+                confirm_txt.Text = "";
+                return;
+            }
+            if (!(type_txt.Text == "User" || type_txt.Text == "Admin"))
+            {
+                MessageBox.Show("Please select a valid Account type");
+                return;
+            }
+            try
+            {
+                double Sal = Double.Parse(salary_txt.Text);
+                if (Sal <= 0) throw new System.ArgumentException("Parameter cannot be null", "original");
+            }
+            catch
+            {
+                MessageBox.Show("Invalid Salary, Salary must be a positive Integer");
+                return;
+            }
 
-       
+            int T = Model.EditUserModel(username_txt.Text, password_txt.Text, type_txt.Text, Double.Parse(salary_txt.Text));
 
-     
+            if (T == -1 || T ==0)
+            {
+                MessageBox.Show("Failed to Edit user , Check if ID exists");
+                return;
+            }
+            else if (T == 1)
+            {
+                MessageBox.Show("User Edited successfully !");
+                Users C2 = new Users();
+                C2.Show();
+                this.Close();
+                return;
+            }
+            
+        
+        }
 
-       
+
+
+
+
+
+
     }
 }
